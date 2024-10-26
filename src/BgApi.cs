@@ -360,14 +360,16 @@ namespace BgApiDriver
             }
         }
 
+		public string ErrorMessage(ble_error error) => m_ble_error2string[error];
+
         /// <summary>
         /// All logging goes through this method for easy overriding.
         /// </summary>
         /// <param name="msg">The message to log.</param>
-        protected virtual void log(string msg)
+        public virtual void log(string msg)
         {
-            Console.WriteLine(msg);
-            System.Diagnostics.Debug.Print(msg);
+            Console.WriteLine($"[{DateTime.Now}]{msg}");
+            System.Diagnostics.Debug.Print($"[{DateTime.Now}]{msg}");
         }
     }
 }
