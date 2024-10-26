@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -27,29 +27,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../README.md" Pack="true" PackagePath=""/>
+    <None Include="../README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
-  <Choose>
-    <When Condition="$(TargetFramework.StartsWith(net9))">
-      <PropertyGroup>
-        <SystemIOPorts>9.0.0-rc.2.24473.5</SystemIOPorts>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(TargetFramework.StartsWith(net8))">
-      <PropertyGroup>
-        <SystemIOPorts>8.0.0</SystemIOPorts>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(TargetFramework.StartsWith(net6))">
-      <PropertyGroup>
-        <SystemIOPorts>6.0.0</SystemIOPorts>
-      </PropertyGroup>
-    </When>
-  </Choose>
-
   <ItemGroup>
-    <PackageReference Include="System.IO.Ports" Version="$(SystemIOPorts)"/>
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
