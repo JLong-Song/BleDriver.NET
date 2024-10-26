@@ -1,4 +1,5 @@
 ﻿using System;
+using static BgApiDriver.BgApi;
 
 namespace BgApiDriver
 {
@@ -11,7 +12,7 @@ namespace BgApiDriver
 
         // header
         public int Length { get { return ((Data[0] & 0x7f) << 8) | Data[1]; } }
-        public int Class { get { return Data[2]; } }
+        public ble_classes Class { get { return (ble_classes)Data[2]; } }
         public int Id { get { return Data[3]; } }
     }
 
@@ -25,7 +26,7 @@ namespace BgApiDriver
         /// <summary>
         /// The result of a response or event.
         /// </summary>
-        public int result = (int)ble_error.ble_err_success;
+        public ble_error result = ble_error.ble_err_success;
     }
     public class BgApiEvent : BgApiEventResponse { }
     public class BgApiResponse : BgApiEventResponse { }
