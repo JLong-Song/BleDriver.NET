@@ -3539,9 +3539,9 @@ namespace BgApiDriver {
                 switch(received.Class)
                 {
                     case ble_classes.ble_cls_system:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_system_boot_id:
+                            case ble_event_ids.ble_evt_system_boot_id:
                                 {
                                     ble_msg_system_boot_evt_t s = new ble_msg_system_boot_evt_t();
                                     s.major = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -3556,7 +3556,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_debug_id:
+                            case ble_event_ids.ble_evt_system_debug_id:
                                 {
                                     ble_msg_system_debug_evt_t s = new ble_msg_system_debug_evt_t();
                                     s.data = new byte[buffer[idx++]];
@@ -3569,7 +3569,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_endpoint_watermark_rx_id:
+                            case ble_event_ids.ble_evt_system_endpoint_watermark_rx_id:
                                 {
                                     ble_msg_system_endpoint_watermark_rx_evt_t s = new ble_msg_system_endpoint_watermark_rx_evt_t();
                                     s.endpoint = (system_endpoints)buffer[idx++];
@@ -3579,7 +3579,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_endpoint_watermark_tx_id:
+                            case ble_event_ids.ble_evt_system_endpoint_watermark_tx_id:
                                 {
                                     ble_msg_system_endpoint_watermark_tx_evt_t s = new ble_msg_system_endpoint_watermark_tx_evt_t();
                                     s.endpoint = (system_endpoints)buffer[idx++];
@@ -3589,7 +3589,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_script_failure_id:
+                            case ble_event_ids.ble_evt_system_script_failure_id:
                                 {
                                     ble_msg_system_script_failure_evt_t s = new ble_msg_system_script_failure_evt_t();
                                     s.address = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -3599,7 +3599,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_no_license_key_id:
+                            case ble_event_ids.ble_evt_system_no_license_key_id:
                                 {
                                     ble_msg_system_no_license_key_evt_t s = new ble_msg_system_no_license_key_evt_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -3607,7 +3607,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_protocol_error_id:
+                            case ble_event_ids.ble_evt_system_protocol_error_id:
                                 {
                                     ble_msg_system_protocol_error_evt_t s = new ble_msg_system_protocol_error_evt_t();
                                     s.reason = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -3616,7 +3616,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_system_usb_enumerated_id:
+                            case ble_event_ids.ble_evt_system_usb_enumerated_id:
                                 {
                                     ble_msg_system_usb_enumerated_evt_t s = new ble_msg_system_usb_enumerated_evt_t();
                                     s.state = buffer[idx++];
@@ -3630,9 +3630,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_flash:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_flash_ps_key_id:
+                            case ble_event_ids.ble_evt_flash_ps_key_id:
                                 {
                                     ble_msg_flash_ps_key_evt_t s = new ble_msg_flash_ps_key_evt_t();
                                     s.key = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -3651,9 +3651,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_attributes:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_attributes_value_id:
+                            case ble_event_ids.ble_evt_attributes_value_id:
                                 {
                                     ble_msg_attributes_value_evt_t s = new ble_msg_attributes_value_evt_t();
                                     s.connection = buffer[idx++];
@@ -3670,7 +3670,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attributes_user_read_request_id:
+                            case ble_event_ids.ble_evt_attributes_user_read_request_id:
                                 {
                                     ble_msg_attributes_user_read_request_evt_t s = new ble_msg_attributes_user_read_request_evt_t();
                                     s.connection = buffer[idx++];
@@ -3682,7 +3682,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attributes_status_id:
+                            case ble_event_ids.ble_evt_attributes_status_id:
                                 {
                                     ble_msg_attributes_status_evt_t s = new ble_msg_attributes_status_evt_t();
                                     s.handle = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -3697,9 +3697,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_connection:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_connection_status_id:
+                            case ble_event_ids.ble_evt_connection_status_id:
                                 {
                                     ble_msg_connection_status_evt_t s = new ble_msg_connection_status_evt_t();
                                     s.connection = buffer[idx++];
@@ -3719,7 +3719,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_connection_version_ind_id:
+                            case ble_event_ids.ble_evt_connection_version_ind_id:
                                 {
                                     ble_msg_connection_version_ind_evt_t s = new ble_msg_connection_version_ind_evt_t();
                                     s.connection = buffer[idx++];
@@ -3731,7 +3731,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_connection_feature_ind_id:
+                            case ble_event_ids.ble_evt_connection_feature_ind_id:
                                 {
                                     ble_msg_connection_feature_ind_evt_t s = new ble_msg_connection_feature_ind_evt_t();
                                     s.connection = buffer[idx++];
@@ -3745,7 +3745,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_connection_raw_rx_id:
+                            case ble_event_ids.ble_evt_connection_raw_rx_id:
                                 {
                                     ble_msg_connection_raw_rx_evt_t s = new ble_msg_connection_raw_rx_evt_t();
                                     s.connection = buffer[idx++];
@@ -3759,7 +3759,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_connection_disconnected_id:
+                            case ble_event_ids.ble_evt_connection_disconnected_id:
                                 {
                                     ble_msg_connection_disconnected_evt_t s = new ble_msg_connection_disconnected_evt_t();
                                     s.connection = buffer[idx++];
@@ -3774,9 +3774,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_attclient:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_attclient_indicated_id:
+                            case ble_event_ids.ble_evt_attclient_indicated_id:
                                 {
                                     ble_msg_attclient_indicated_evt_t s = new ble_msg_attclient_indicated_evt_t();
                                     s.connection = buffer[idx++];
@@ -3786,7 +3786,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attclient_procedure_completed_id:
+                            case ble_event_ids.ble_evt_attclient_procedure_completed_id:
                                 {
                                     ble_msg_attclient_procedure_completed_evt_t s = new ble_msg_attclient_procedure_completed_evt_t();
                                     s.connection = buffer[idx++];
@@ -3797,7 +3797,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attclient_group_found_id:
+                            case ble_event_ids.ble_evt_attclient_group_found_id:
                                 {
                                     ble_msg_attclient_group_found_evt_t s = new ble_msg_attclient_group_found_evt_t();
                                     s.connection = buffer[idx++];
@@ -3813,7 +3813,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attclient_attribute_found_id:
+                            case ble_event_ids.ble_evt_attclient_attribute_found_id:
                                 {
                                     ble_msg_attclient_attribute_found_evt_t s = new ble_msg_attclient_attribute_found_evt_t();
                                     s.connection = buffer[idx++];
@@ -3830,7 +3830,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attclient_find_information_found_id:
+                            case ble_event_ids.ble_evt_attclient_find_information_found_id:
                                 {
                                     ble_msg_attclient_find_information_found_evt_t s = new ble_msg_attclient_find_information_found_evt_t();
                                     s.connection = buffer[idx++];
@@ -3845,7 +3845,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attclient_attribute_value_id:
+                            case ble_event_ids.ble_evt_attclient_attribute_value_id:
                                 {
                                     ble_msg_attclient_attribute_value_evt_t s = new ble_msg_attclient_attribute_value_evt_t();
                                     s.connection = buffer[idx++];
@@ -3861,7 +3861,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_attclient_read_multiple_response_id:
+                            case ble_event_ids.ble_evt_attclient_read_multiple_response_id:
                                 {
                                     ble_msg_attclient_read_multiple_response_evt_t s = new ble_msg_attclient_read_multiple_response_evt_t();
                                     s.connection = buffer[idx++];
@@ -3880,9 +3880,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_sm:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_sm_smp_data_id:
+                            case ble_event_ids.ble_evt_sm_smp_data_id:
                                 {
                                     ble_msg_sm_smp_data_evt_t s = new ble_msg_sm_smp_data_evt_t();
                                     s.handle = buffer[idx++];
@@ -3897,7 +3897,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_sm_bonding_fail_id:
+                            case ble_event_ids.ble_evt_sm_bonding_fail_id:
                                 {
                                     ble_msg_sm_bonding_fail_evt_t s = new ble_msg_sm_bonding_fail_evt_t();
                                     s.handle = buffer[idx++];
@@ -3907,7 +3907,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_sm_passkey_display_id:
+                            case ble_event_ids.ble_evt_sm_passkey_display_id:
                                 {
                                     ble_msg_sm_passkey_display_evt_t s = new ble_msg_sm_passkey_display_evt_t();
                                     s.handle = buffer[idx++];
@@ -3917,7 +3917,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_sm_passkey_request_id:
+                            case ble_event_ids.ble_evt_sm_passkey_request_id:
                                 {
                                     ble_msg_sm_passkey_request_evt_t s = new ble_msg_sm_passkey_request_evt_t();
                                     s.handle = buffer[idx++];
@@ -3926,7 +3926,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_sm_bond_status_id:
+                            case ble_event_ids.ble_evt_sm_bond_status_id:
                                 {
                                     ble_msg_sm_bond_status_evt_t s = new ble_msg_sm_bond_status_evt_t();
                                     s.bond = buffer[idx++];
@@ -3943,9 +3943,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_gap:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_gap_scan_response_id:
+                            case ble_event_ids.ble_evt_gap_scan_response_id:
                                 {
                                     ble_msg_gap_scan_response_evt_t s = new ble_msg_gap_scan_response_evt_t();
                                     s.rssi = (sbyte)buffer[idx++];
@@ -3967,7 +3967,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_gap_mode_changed_id:
+                            case ble_event_ids.ble_evt_gap_mode_changed_id:
                                 {
                                     ble_msg_gap_mode_changed_evt_t s = new ble_msg_gap_mode_changed_evt_t();
                                     s.discover = buffer[idx++];
@@ -3982,9 +3982,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_hardware:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_hardware_io_port_status_id:
+                            case ble_event_ids.ble_evt_hardware_io_port_status_id:
                                 {
                                     ble_msg_hardware_io_port_status_evt_t s = new ble_msg_hardware_io_port_status_evt_t();
                                     s.timestamp = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
@@ -3996,7 +3996,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_hardware_soft_timer_id:
+                            case ble_event_ids.ble_evt_hardware_soft_timer_id:
                                 {
                                     ble_msg_hardware_soft_timer_evt_t s = new ble_msg_hardware_soft_timer_evt_t();
                                     s.handle = buffer[idx++];
@@ -4005,7 +4005,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_hardware_adc_result_id:
+                            case ble_event_ids.ble_evt_hardware_adc_result_id:
                                 {
                                     ble_msg_hardware_adc_result_evt_t s = new ble_msg_hardware_adc_result_evt_t();
                                     s.input = buffer[idx++];
@@ -4015,7 +4015,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_hardware_analog_comparator_status_id:
+                            case ble_event_ids.ble_evt_hardware_analog_comparator_status_id:
                                 {
                                     ble_msg_hardware_analog_comparator_status_evt_t s = new ble_msg_hardware_analog_comparator_status_evt_t();
                                     s.timestamp = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
@@ -4025,7 +4025,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_event_ids.ble_evt_hardware_radio_error_id:
+                            case ble_event_ids.ble_evt_hardware_radio_error_id:
                                 {
                                     ble_msg_hardware_radio_error_evt_t s = new ble_msg_hardware_radio_error_evt_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4038,16 +4038,16 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_test:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
                             default:
                                 throw new BgApiException(string.Format("Unknown event id 0x{0}", buffer[3].ToString("X2")));
                         }
                         break;
                     case ble_classes.ble_cls_dfu:
-                        switch(received.Id)
+                        switch((ble_event_ids)received.Id)
                         {
-                            case (byte)ble_event_ids.ble_evt_dfu_boot_id:
+                            case ble_event_ids.ble_evt_dfu_boot_id:
                                 {
                                     ble_msg_dfu_boot_evt_t s = new ble_msg_dfu_boot_evt_t();
                                     s.version = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
@@ -4069,9 +4069,9 @@ namespace BgApiDriver {
                 switch(received.Class)
                 {
                     case ble_classes.ble_cls_system:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_system_hello_id:
+                            case ble_command_ids.ble_cmd_system_hello_id:
                                 {
                                     ble_msg_system_hello_rsp_t s = new ble_msg_system_hello_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4079,7 +4079,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_address_get_id:
+                            case ble_command_ids.ble_cmd_system_address_get_id:
                                 {
                                     ble_msg_system_address_get_rsp_t s = new ble_msg_system_address_get_rsp_t();
                                     s.address = new bd_addr();
@@ -4092,7 +4092,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_reg_write_id:
+                            case ble_command_ids.ble_cmd_system_reg_write_id:
                                 {
                                     ble_msg_system_reg_write_rsp_t s = new ble_msg_system_reg_write_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4101,7 +4101,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_reg_read_id:
+                            case ble_command_ids.ble_cmd_system_reg_read_id:
                                 {
                                     ble_msg_system_reg_read_rsp_t s = new ble_msg_system_reg_read_rsp_t();
                                     s.address = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -4111,7 +4111,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_get_counters_id:
+                            case ble_command_ids.ble_cmd_system_get_counters_id:
                                 {
                                     ble_msg_system_get_counters_rsp_t s = new ble_msg_system_get_counters_rsp_t();
                                     s.txok = buffer[idx++];
@@ -4124,7 +4124,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_get_connections_id:
+                            case ble_command_ids.ble_cmd_system_get_connections_id:
                                 {
                                     ble_msg_system_get_connections_rsp_t s = new ble_msg_system_get_connections_rsp_t();
                                     s.maxconn = buffer[idx++];
@@ -4133,7 +4133,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_read_memory_id:
+                            case ble_command_ids.ble_cmd_system_read_memory_id:
                                 {
                                     ble_msg_system_read_memory_rsp_t s = new ble_msg_system_read_memory_rsp_t();
                                     s.address = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
@@ -4147,7 +4147,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_get_info_id:
+                            case ble_command_ids.ble_cmd_system_get_info_id:
                                 {
                                     ble_msg_system_get_info_rsp_t s = new ble_msg_system_get_info_rsp_t();
                                     s.major = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -4162,7 +4162,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_endpoint_tx_id:
+                            case ble_command_ids.ble_cmd_system_endpoint_tx_id:
                                 {
                                     ble_msg_system_endpoint_tx_rsp_t s = new ble_msg_system_endpoint_tx_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4171,7 +4171,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_whitelist_append_id:
+                            case ble_command_ids.ble_cmd_system_whitelist_append_id:
                                 {
                                     ble_msg_system_whitelist_append_rsp_t s = new ble_msg_system_whitelist_append_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4180,7 +4180,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_whitelist_remove_id:
+                            case ble_command_ids.ble_cmd_system_whitelist_remove_id:
                                 {
                                     ble_msg_system_whitelist_remove_rsp_t s = new ble_msg_system_whitelist_remove_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4189,7 +4189,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_whitelist_clear_id:
+                            case ble_command_ids.ble_cmd_system_whitelist_clear_id:
                                 {
                                     ble_msg_system_whitelist_clear_rsp_t s = new ble_msg_system_whitelist_clear_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4197,7 +4197,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_endpoint_rx_id:
+                            case ble_command_ids.ble_cmd_system_endpoint_rx_id:
                                 {
                                     ble_msg_system_endpoint_rx_rsp_t s = new ble_msg_system_endpoint_rx_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4211,7 +4211,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_endpoint_set_watermarks_id:
+                            case ble_command_ids.ble_cmd_system_endpoint_set_watermarks_id:
                                 {
                                     ble_msg_system_endpoint_set_watermarks_rsp_t s = new ble_msg_system_endpoint_set_watermarks_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4220,7 +4220,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_aes_setkey_id:
+                            case ble_command_ids.ble_cmd_system_aes_setkey_id:
                                 {
                                     ble_msg_system_aes_setkey_rsp_t s = new ble_msg_system_aes_setkey_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4228,7 +4228,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_aes_encrypt_id:
+                            case ble_command_ids.ble_cmd_system_aes_encrypt_id:
                                 {
                                     ble_msg_system_aes_encrypt_rsp_t s = new ble_msg_system_aes_encrypt_rsp_t();
                                     s.data = new byte[buffer[idx++]];
@@ -4241,7 +4241,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_aes_decrypt_id:
+                            case ble_command_ids.ble_cmd_system_aes_decrypt_id:
                                 {
                                     ble_msg_system_aes_decrypt_rsp_t s = new ble_msg_system_aes_decrypt_rsp_t();
                                     s.data = new byte[buffer[idx++]];
@@ -4254,7 +4254,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_usb_enumeration_status_get_id:
+                            case ble_command_ids.ble_cmd_system_usb_enumeration_status_get_id:
                                 {
                                     ble_msg_system_usb_enumeration_status_get_rsp_t s = new ble_msg_system_usb_enumeration_status_get_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4264,7 +4264,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_system_get_bootloader_crc_id:
+                            case ble_command_ids.ble_cmd_system_get_bootloader_crc_id:
                                 {
                                     ble_msg_system_get_bootloader_crc_rsp_t s = new ble_msg_system_get_bootloader_crc_rsp_t();
                                     s.crc = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -4278,9 +4278,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_flash:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_flash_ps_defrag_id:
+                            case ble_command_ids.ble_cmd_flash_ps_defrag_id:
                                 {
                                     ble_msg_flash_ps_defrag_rsp_t s = new ble_msg_flash_ps_defrag_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4288,7 +4288,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_ps_dump_id:
+                            case ble_command_ids.ble_cmd_flash_ps_dump_id:
                                 {
                                     ble_msg_flash_ps_dump_rsp_t s = new ble_msg_flash_ps_dump_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4296,7 +4296,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_ps_erase_all_id:
+                            case ble_command_ids.ble_cmd_flash_ps_erase_all_id:
                                 {
                                     ble_msg_flash_ps_erase_all_rsp_t s = new ble_msg_flash_ps_erase_all_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4304,7 +4304,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_ps_save_id:
+                            case ble_command_ids.ble_cmd_flash_ps_save_id:
                                 {
                                     ble_msg_flash_ps_save_rsp_t s = new ble_msg_flash_ps_save_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4313,7 +4313,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_ps_load_id:
+                            case ble_command_ids.ble_cmd_flash_ps_load_id:
                                 {
                                     ble_msg_flash_ps_load_rsp_t s = new ble_msg_flash_ps_load_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4327,7 +4327,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_ps_erase_id:
+                            case ble_command_ids.ble_cmd_flash_ps_erase_id:
                                 {
                                     ble_msg_flash_ps_erase_rsp_t s = new ble_msg_flash_ps_erase_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4335,7 +4335,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_erase_page_id:
+                            case ble_command_ids.ble_cmd_flash_erase_page_id:
                                 {
                                     ble_msg_flash_erase_page_rsp_t s = new ble_msg_flash_erase_page_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4344,7 +4344,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_write_data_id:
+                            case ble_command_ids.ble_cmd_flash_write_data_id:
                                 {
                                     ble_msg_flash_write_data_rsp_t s = new ble_msg_flash_write_data_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4353,7 +4353,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_flash_read_data_id:
+                            case ble_command_ids.ble_cmd_flash_read_data_id:
                                 {
                                     ble_msg_flash_read_data_rsp_t s = new ble_msg_flash_read_data_rsp_t();
                                     s.data = new byte[buffer[idx++]];
@@ -4371,9 +4371,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_attributes:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_attributes_write_id:
+                            case ble_command_ids.ble_cmd_attributes_write_id:
                                 {
                                     ble_msg_attributes_write_rsp_t s = new ble_msg_attributes_write_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4382,7 +4382,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attributes_read_id:
+                            case ble_command_ids.ble_cmd_attributes_read_id:
                                 {
                                     ble_msg_attributes_read_rsp_t s = new ble_msg_attributes_read_rsp_t();
                                     s.handle = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -4398,7 +4398,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attributes_read_type_id:
+                            case ble_command_ids.ble_cmd_attributes_read_type_id:
                                 {
                                     ble_msg_attributes_read_type_rsp_t s = new ble_msg_attributes_read_type_rsp_t();
                                     s.handle = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -4413,7 +4413,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attributes_user_read_response_id:
+                            case ble_command_ids.ble_cmd_attributes_user_read_response_id:
                                 {
                                     ble_msg_attributes_user_read_response_rsp_t s = new ble_msg_attributes_user_read_response_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4421,7 +4421,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attributes_user_write_response_id:
+                            case ble_command_ids.ble_cmd_attributes_user_write_response_id:
                                 {
                                     ble_msg_attributes_user_write_response_rsp_t s = new ble_msg_attributes_user_write_response_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4429,7 +4429,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attributes_send_id:
+                            case ble_command_ids.ble_cmd_attributes_send_id:
                                 {
                                     ble_msg_attributes_send_rsp_t s = new ble_msg_attributes_send_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4443,9 +4443,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_connection:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_connection_disconnect_id:
+                            case ble_command_ids.ble_cmd_connection_disconnect_id:
                                 {
                                     ble_msg_connection_disconnect_rsp_t s = new ble_msg_connection_disconnect_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4455,7 +4455,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_get_rssi_id:
+                            case ble_command_ids.ble_cmd_connection_get_rssi_id:
                                 {
                                     ble_msg_connection_get_rssi_rsp_t s = new ble_msg_connection_get_rssi_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4465,7 +4465,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_update_id:
+                            case ble_command_ids.ble_cmd_connection_update_id:
                                 {
                                     ble_msg_connection_update_rsp_t s = new ble_msg_connection_update_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4475,7 +4475,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_version_update_id:
+                            case ble_command_ids.ble_cmd_connection_version_update_id:
                                 {
                                     ble_msg_connection_version_update_rsp_t s = new ble_msg_connection_version_update_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4485,7 +4485,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_channel_map_get_id:
+                            case ble_command_ids.ble_cmd_connection_channel_map_get_id:
                                 {
                                     ble_msg_connection_channel_map_get_rsp_t s = new ble_msg_connection_channel_map_get_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4499,7 +4499,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_channel_map_set_id:
+                            case ble_command_ids.ble_cmd_connection_channel_map_set_id:
                                 {
                                     ble_msg_connection_channel_map_set_rsp_t s = new ble_msg_connection_channel_map_set_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4509,7 +4509,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_features_get_id:
+                            case ble_command_ids.ble_cmd_connection_features_get_id:
                                 {
                                     ble_msg_connection_features_get_rsp_t s = new ble_msg_connection_features_get_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4519,7 +4519,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_get_status_id:
+                            case ble_command_ids.ble_cmd_connection_get_status_id:
                                 {
                                     ble_msg_connection_get_status_rsp_t s = new ble_msg_connection_get_status_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4528,7 +4528,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_raw_tx_id:
+                            case ble_command_ids.ble_cmd_connection_raw_tx_id:
                                 {
                                     ble_msg_connection_raw_tx_rsp_t s = new ble_msg_connection_raw_tx_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4537,7 +4537,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_connection_slave_latency_disable_id:
+                            case ble_command_ids.ble_cmd_connection_slave_latency_disable_id:
                                 {
                                     ble_msg_connection_slave_latency_disable_rsp_t s = new ble_msg_connection_slave_latency_disable_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4551,9 +4551,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_attclient:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_attclient_find_by_type_value_id:
+                            case ble_command_ids.ble_cmd_attclient_find_by_type_value_id:
                                 {
                                     ble_msg_attclient_find_by_type_value_rsp_t s = new ble_msg_attclient_find_by_type_value_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4563,7 +4563,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_read_by_group_type_id:
+                            case ble_command_ids.ble_cmd_attclient_read_by_group_type_id:
                                 {
                                     ble_msg_attclient_read_by_group_type_rsp_t s = new ble_msg_attclient_read_by_group_type_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4573,7 +4573,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_read_by_type_id:
+                            case ble_command_ids.ble_cmd_attclient_read_by_type_id:
                                 {
                                     ble_msg_attclient_read_by_type_rsp_t s = new ble_msg_attclient_read_by_type_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4583,7 +4583,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_find_information_id:
+                            case ble_command_ids.ble_cmd_attclient_find_information_id:
                                 {
                                     ble_msg_attclient_find_information_rsp_t s = new ble_msg_attclient_find_information_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4593,7 +4593,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_read_by_handle_id:
+                            case ble_command_ids.ble_cmd_attclient_read_by_handle_id:
                                 {
                                     ble_msg_attclient_read_by_handle_rsp_t s = new ble_msg_attclient_read_by_handle_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4603,7 +4603,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_attribute_write_id:
+                            case ble_command_ids.ble_cmd_attclient_attribute_write_id:
                                 {
                                     ble_msg_attclient_attribute_write_rsp_t s = new ble_msg_attclient_attribute_write_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4613,7 +4613,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_write_command_id:
+                            case ble_command_ids.ble_cmd_attclient_write_command_id:
                                 {
                                     ble_msg_attclient_write_command_rsp_t s = new ble_msg_attclient_write_command_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4623,7 +4623,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_indicate_confirm_id:
+                            case ble_command_ids.ble_cmd_attclient_indicate_confirm_id:
                                 {
                                     ble_msg_attclient_indicate_confirm_rsp_t s = new ble_msg_attclient_indicate_confirm_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4632,7 +4632,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_read_long_id:
+                            case ble_command_ids.ble_cmd_attclient_read_long_id:
                                 {
                                     ble_msg_attclient_read_long_rsp_t s = new ble_msg_attclient_read_long_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4642,7 +4642,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_prepare_write_id:
+                            case ble_command_ids.ble_cmd_attclient_prepare_write_id:
                                 {
                                     ble_msg_attclient_prepare_write_rsp_t s = new ble_msg_attclient_prepare_write_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4652,7 +4652,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_execute_write_id:
+                            case ble_command_ids.ble_cmd_attclient_execute_write_id:
                                 {
                                     ble_msg_attclient_execute_write_rsp_t s = new ble_msg_attclient_execute_write_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4662,7 +4662,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_attclient_read_multiple_id:
+                            case ble_command_ids.ble_cmd_attclient_read_multiple_id:
                                 {
                                     ble_msg_attclient_read_multiple_rsp_t s = new ble_msg_attclient_read_multiple_rsp_t();
                                     s.connection = buffer[idx++];
@@ -4677,9 +4677,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_sm:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_sm_encrypt_start_id:
+                            case ble_command_ids.ble_cmd_sm_encrypt_start_id:
                                 {
                                     ble_msg_sm_encrypt_start_rsp_t s = new ble_msg_sm_encrypt_start_rsp_t();
                                     s.handle = buffer[idx++];
@@ -4689,7 +4689,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_set_bondable_mode_id:
+                            case ble_command_ids.ble_cmd_sm_set_bondable_mode_id:
                                 {
                                     ble_msg_sm_set_bondable_mode_rsp_t s = new ble_msg_sm_set_bondable_mode_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4697,7 +4697,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_delete_bonding_id:
+                            case ble_command_ids.ble_cmd_sm_delete_bonding_id:
                                 {
                                     ble_msg_sm_delete_bonding_rsp_t s = new ble_msg_sm_delete_bonding_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4706,7 +4706,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_set_parameters_id:
+                            case ble_command_ids.ble_cmd_sm_set_parameters_id:
                                 {
                                     ble_msg_sm_set_parameters_rsp_t s = new ble_msg_sm_set_parameters_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4714,7 +4714,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_passkey_entry_id:
+                            case ble_command_ids.ble_cmd_sm_passkey_entry_id:
                                 {
                                     ble_msg_sm_passkey_entry_rsp_t s = new ble_msg_sm_passkey_entry_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4723,7 +4723,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_get_bonds_id:
+                            case ble_command_ids.ble_cmd_sm_get_bonds_id:
                                 {
                                     ble_msg_sm_get_bonds_rsp_t s = new ble_msg_sm_get_bonds_rsp_t();
                                     s.bonds = buffer[idx++];
@@ -4732,7 +4732,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_set_oob_data_id:
+                            case ble_command_ids.ble_cmd_sm_set_oob_data_id:
                                 {
                                     ble_msg_sm_set_oob_data_rsp_t s = new ble_msg_sm_set_oob_data_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4740,7 +4740,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_whitelist_bonds_id:
+                            case ble_command_ids.ble_cmd_sm_whitelist_bonds_id:
                                 {
                                     ble_msg_sm_whitelist_bonds_rsp_t s = new ble_msg_sm_whitelist_bonds_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4750,7 +4750,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_sm_set_pairing_distribution_keys_id:
+                            case ble_command_ids.ble_cmd_sm_set_pairing_distribution_keys_id:
                                 {
                                     ble_msg_sm_set_pairing_distribution_keys_rsp_t s = new ble_msg_sm_set_pairing_distribution_keys_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4764,9 +4764,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_gap:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_gap_set_privacy_flags_id:
+                            case ble_command_ids.ble_cmd_gap_set_privacy_flags_id:
                                 {
                                     ble_msg_gap_set_privacy_flags_rsp_t s = new ble_msg_gap_set_privacy_flags_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -4774,7 +4774,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_mode_id:
+                            case ble_command_ids.ble_cmd_gap_set_mode_id:
                                 {
                                     ble_msg_gap_set_mode_rsp_t s = new ble_msg_gap_set_mode_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4783,7 +4783,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_discover_id:
+                            case ble_command_ids.ble_cmd_gap_discover_id:
                                 {
                                     ble_msg_gap_discover_rsp_t s = new ble_msg_gap_discover_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4792,7 +4792,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_connect_direct_id:
+                            case ble_command_ids.ble_cmd_gap_connect_direct_id:
                                 {
                                     ble_msg_gap_connect_direct_rsp_t s = new ble_msg_gap_connect_direct_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4802,7 +4802,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_end_procedure_id:
+                            case ble_command_ids.ble_cmd_gap_end_procedure_id:
                                 {
                                     ble_msg_gap_end_procedure_rsp_t s = new ble_msg_gap_end_procedure_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4811,7 +4811,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_connect_selective_id:
+                            case ble_command_ids.ble_cmd_gap_connect_selective_id:
                                 {
                                     ble_msg_gap_connect_selective_rsp_t s = new ble_msg_gap_connect_selective_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4821,7 +4821,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_filtering_id:
+                            case ble_command_ids.ble_cmd_gap_set_filtering_id:
                                 {
                                     ble_msg_gap_set_filtering_rsp_t s = new ble_msg_gap_set_filtering_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4830,7 +4830,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_scan_parameters_id:
+                            case ble_command_ids.ble_cmd_gap_set_scan_parameters_id:
                                 {
                                     ble_msg_gap_set_scan_parameters_rsp_t s = new ble_msg_gap_set_scan_parameters_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4839,7 +4839,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_adv_parameters_id:
+                            case ble_command_ids.ble_cmd_gap_set_adv_parameters_id:
                                 {
                                     ble_msg_gap_set_adv_parameters_rsp_t s = new ble_msg_gap_set_adv_parameters_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4848,7 +4848,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_adv_data_id:
+                            case ble_command_ids.ble_cmd_gap_set_adv_data_id:
                                 {
                                     ble_msg_gap_set_adv_data_rsp_t s = new ble_msg_gap_set_adv_data_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4857,7 +4857,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_directed_connectable_mode_id:
+                            case ble_command_ids.ble_cmd_gap_set_directed_connectable_mode_id:
                                 {
                                     ble_msg_gap_set_directed_connectable_mode_rsp_t s = new ble_msg_gap_set_directed_connectable_mode_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4866,7 +4866,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_initiating_con_parameters_id:
+                            case ble_command_ids.ble_cmd_gap_set_initiating_con_parameters_id:
                                 {
                                     ble_msg_gap_set_initiating_con_parameters_rsp_t s = new ble_msg_gap_set_initiating_con_parameters_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4875,7 +4875,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_gap_set_nonresolvable_address_id:
+                            case ble_command_ids.ble_cmd_gap_set_nonresolvable_address_id:
                                 {
                                     ble_msg_gap_set_nonresolvable_address_rsp_t s = new ble_msg_gap_set_nonresolvable_address_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4889,9 +4889,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_hardware:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_config_irq_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_config_irq_id:
                                 {
                                     ble_msg_hardware_io_port_config_irq_rsp_t s = new ble_msg_hardware_io_port_config_irq_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4900,7 +4900,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_set_soft_timer_id:
+                            case ble_command_ids.ble_cmd_hardware_set_soft_timer_id:
                                 {
                                     ble_msg_hardware_set_soft_timer_rsp_t s = new ble_msg_hardware_set_soft_timer_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4909,7 +4909,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_adc_read_id:
+                            case ble_command_ids.ble_cmd_hardware_adc_read_id:
                                 {
                                     ble_msg_hardware_adc_read_rsp_t s = new ble_msg_hardware_adc_read_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4918,7 +4918,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_config_direction_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_config_direction_id:
                                 {
                                     ble_msg_hardware_io_port_config_direction_rsp_t s = new ble_msg_hardware_io_port_config_direction_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4927,7 +4927,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_config_function_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_config_function_id:
                                 {
                                     ble_msg_hardware_io_port_config_function_rsp_t s = new ble_msg_hardware_io_port_config_function_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4936,7 +4936,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_config_pull_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_config_pull_id:
                                 {
                                     ble_msg_hardware_io_port_config_pull_rsp_t s = new ble_msg_hardware_io_port_config_pull_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4945,7 +4945,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_write_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_write_id:
                                 {
                                     ble_msg_hardware_io_port_write_rsp_t s = new ble_msg_hardware_io_port_write_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4954,7 +4954,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_read_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_read_id:
                                 {
                                     ble_msg_hardware_io_port_read_rsp_t s = new ble_msg_hardware_io_port_read_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4965,7 +4965,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_spi_config_id:
+                            case ble_command_ids.ble_cmd_hardware_spi_config_id:
                                 {
                                     ble_msg_hardware_spi_config_rsp_t s = new ble_msg_hardware_spi_config_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4974,7 +4974,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_spi_transfer_id:
+                            case ble_command_ids.ble_cmd_hardware_spi_transfer_id:
                                 {
                                     ble_msg_hardware_spi_transfer_rsp_t s = new ble_msg_hardware_spi_transfer_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -4989,7 +4989,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_i2c_read_id:
+                            case ble_command_ids.ble_cmd_hardware_i2c_read_id:
                                 {
                                     ble_msg_hardware_i2c_read_rsp_t s = new ble_msg_hardware_i2c_read_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5003,7 +5003,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_i2c_write_id:
+                            case ble_command_ids.ble_cmd_hardware_i2c_write_id:
                                 {
                                     ble_msg_hardware_i2c_write_rsp_t s = new ble_msg_hardware_i2c_write_rsp_t();
                                     s.written = buffer[idx++];
@@ -5012,7 +5012,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_set_txpower_id:
+                            case ble_command_ids.ble_cmd_hardware_set_txpower_id:
                                 {
                                     ble_msg_hardware_set_txpower_rsp_t s = new ble_msg_hardware_set_txpower_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5020,7 +5020,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_timer_comparator_id:
+                            case ble_command_ids.ble_cmd_hardware_timer_comparator_id:
                                 {
                                     ble_msg_hardware_timer_comparator_rsp_t s = new ble_msg_hardware_timer_comparator_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5029,7 +5029,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_irq_enable_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_irq_enable_id:
                                 {
                                     ble_msg_hardware_io_port_irq_enable_rsp_t s = new ble_msg_hardware_io_port_irq_enable_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5038,7 +5038,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_io_port_irq_direction_id:
+                            case ble_command_ids.ble_cmd_hardware_io_port_irq_direction_id:
                                 {
                                     ble_msg_hardware_io_port_irq_direction_rsp_t s = new ble_msg_hardware_io_port_irq_direction_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5047,7 +5047,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_analog_comparator_enable_id:
+                            case ble_command_ids.ble_cmd_hardware_analog_comparator_enable_id:
                                 {
                                     ble_msg_hardware_analog_comparator_enable_rsp_t s = new ble_msg_hardware_analog_comparator_enable_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5055,7 +5055,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_analog_comparator_read_id:
+                            case ble_command_ids.ble_cmd_hardware_analog_comparator_read_id:
                                 {
                                     ble_msg_hardware_analog_comparator_read_rsp_t s = new ble_msg_hardware_analog_comparator_read_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5065,7 +5065,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_analog_comparator_config_irq_id:
+                            case ble_command_ids.ble_cmd_hardware_analog_comparator_config_irq_id:
                                 {
                                     ble_msg_hardware_analog_comparator_config_irq_rsp_t s = new ble_msg_hardware_analog_comparator_config_irq_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5074,7 +5074,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_set_rxgain_id:
+                            case ble_command_ids.ble_cmd_hardware_set_rxgain_id:
                                 {
                                     ble_msg_hardware_set_rxgain_rsp_t s = new ble_msg_hardware_set_rxgain_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5082,7 +5082,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_usb_enable_id:
+                            case ble_command_ids.ble_cmd_hardware_usb_enable_id:
                                 {
                                     ble_msg_hardware_usb_enable_rsp_t s = new ble_msg_hardware_usb_enable_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5091,7 +5091,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_sleep_enable_id:
+                            case ble_command_ids.ble_cmd_hardware_sleep_enable_id:
                                 {
                                     ble_msg_hardware_sleep_enable_rsp_t s = new ble_msg_hardware_sleep_enable_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5100,7 +5100,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_hardware_get_timestamp_id:
+                            case ble_command_ids.ble_cmd_hardware_get_timestamp_id:
                                 {
                                     ble_msg_hardware_get_timestamp_rsp_t s = new ble_msg_hardware_get_timestamp_rsp_t();
                                     s.value = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
@@ -5114,9 +5114,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_test:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_test_phy_tx_id:
+                            case ble_command_ids.ble_cmd_test_phy_tx_id:
                                 {
                                     ble_msg_test_phy_tx_rsp_t s = new ble_msg_test_phy_tx_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5124,7 +5124,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_test_phy_rx_id:
+                            case ble_command_ids.ble_cmd_test_phy_rx_id:
                                 {
                                     ble_msg_test_phy_rx_rsp_t s = new ble_msg_test_phy_rx_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5132,7 +5132,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_test_phy_end_id:
+                            case ble_command_ids.ble_cmd_test_phy_end_id:
                                 {
                                     ble_msg_test_phy_end_rsp_t s = new ble_msg_test_phy_end_rsp_t();
                                     s.counter = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
@@ -5141,7 +5141,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_test_phy_reset_id:
+                            case ble_command_ids.ble_cmd_test_phy_reset_id:
                                 {
                                     ble_msg_test_phy_reset_rsp_t s = new ble_msg_test_phy_reset_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5149,7 +5149,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_test_get_channel_map_id:
+                            case ble_command_ids.ble_cmd_test_get_channel_map_id:
                                 {
                                     ble_msg_test_get_channel_map_rsp_t s = new ble_msg_test_get_channel_map_rsp_t();
                                     s.channel_map = new byte[buffer[idx++]];
@@ -5162,7 +5162,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_test_debug_id:
+                            case ble_command_ids.ble_cmd_test_debug_id:
                                 {
                                     ble_msg_test_debug_rsp_t s = new ble_msg_test_debug_rsp_t();
                                     s.opcode = buffer[idx++];
@@ -5176,7 +5176,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_test_channel_mode_id:
+                            case ble_command_ids.ble_cmd_test_channel_mode_id:
                                 {
                                     ble_msg_test_channel_mode_rsp_t s = new ble_msg_test_channel_mode_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
@@ -5189,9 +5189,9 @@ namespace BgApiDriver {
                         }
                         break;
                     case ble_classes.ble_cls_dfu:
-                        switch(received.Id)
+                        switch((ble_command_ids)received.Id)
                         {
-                            case (byte)ble_command_ids.ble_cmd_dfu_flash_set_address_id:
+                            case ble_command_ids.ble_cmd_dfu_flash_set_address_id:
                                 {
                                     ble_msg_dfu_flash_set_address_rsp_t s = new ble_msg_dfu_flash_set_address_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5200,7 +5200,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_dfu_flash_upload_id:
+                            case ble_command_ids.ble_cmd_dfu_flash_upload_id:
                                 {
                                     ble_msg_dfu_flash_upload_rsp_t s = new ble_msg_dfu_flash_upload_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5209,7 +5209,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_dfu_flash_upload_finish_id:
+                            case ble_command_ids.ble_cmd_dfu_flash_upload_finish_id:
                                 {
                                     ble_msg_dfu_flash_upload_finish_rsp_t s = new ble_msg_dfu_flash_upload_finish_rsp_t();
                                     s.result = (ble_error)(buffer[idx + 0] | (buffer[idx + 1] << 8)); idx+=2;
@@ -5218,7 +5218,7 @@ namespace BgApiDriver {
                                     res = s;
                                 }
                                 break;
-                            case (byte)ble_command_ids.ble_cmd_dfu_get_bootloader_crc_id:
+                            case ble_command_ids.ble_cmd_dfu_get_bootloader_crc_id:
                                 {
                                     ble_msg_dfu_get_bootloader_crc_rsp_t s = new ble_msg_dfu_get_bootloader_crc_rsp_t();
                                     s.crc = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
