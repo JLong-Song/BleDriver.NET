@@ -3,156 +3,161 @@ using static BgApiDriver.BgApi;
 
 namespace BgApiDriver.Tests
 {
-    /// <summary>
-    /// Basic command tests.
-    /// </summary>
-    [TestClass]
-    public class CommandTests
-    {
-        class MyBgApi : BgApi
-        {
-            public MyBgApi(string comPort) : base(comPort) { }
-        }
-        
-        MyBgApi dongle;
+	/// <summary>
+	/// Basic command tests.
+	/// </summary>
+	[TestClass]
+	public class CommandTests
+	{
+		class MyBgApi : BgApi
+		{
+			public MyBgApi(string comPort) : base(comPort) { }
+		}
 
-        [TestInitialize()]
-        public async Task MyTestInitialize()
-        {
-            // FIXME: configure the serial port
-            dongle = new MyBgApi("COM9");
-            await dongle.Open();
-        }
-        
-        [TestCleanup()]
-        public void MyTestCleanup()
-        {
-            dongle.Close();
-        }
+		MyBgApi dongle;
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public async Task HelloAddressGetTest()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                // say 'hello'
-                await dongle.ble_cmd_system_hello();
+		[TestInitialize()]
+		public async Task MyTestInitialize()
+		{
+			// FIXME: configure the serial port
+			dongle = new MyBgApi("COM9");
+			await dongle.Open();
+		}
 
-                // ask for underlying BT address
-                var rsp = await dongle.ble_cmd_system_address_get();
-                Assert.AreEqual(6, rsp.address.Length);
-            }
-        }
+		[TestCleanup()]
+		public void MyTestCleanup()
+		{
+			dongle.Close();
+		}
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public async Task TimerTest()
-        {
-            int numTimerCalls = 0;
+		[TestMethod]
+		[TestCategory("Integration")]
+		public async Task HelloAddressGetTest()
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				// say 'hello'
+				await dongle.ble_cmd_system_hello();
 
-            // setup callback
-            dongle.BgApiEventHandler = evt => {
-                Assert.AreEqual(evt.GetType(), typeof(ble_msg_hardware_soft_timer_evt_t));
+				// ask for underlying BT address
+				var rsp = await dongle.ble_cmd_system_address_get();
+				Assert.AreEqual(6, rsp.address.Length);
+			}
+		}
 
-                var e = (ble_msg_hardware_soft_timer_evt_t)evt;
-                numTimerCalls++;
-                return Task.FromResult(true);
-            };
+		[TestMethod]
+		[TestCategory("Integration")]
+		public async Task TimerTest()
+		{
+			int numTimerCalls = 0;
 
-            // enable timer
-            var rsp = await dongle.ble_cmd_hardware_set_soft_timer(35000 /* about every second */, 1, 0 /* periodic */);
-            Assert.AreEqual(ble_error.ble_err_success, rsp.result);
-            await Task.Delay(5000);
-            // disable timer
-            var rsp2 = await dongle.ble_cmd_hardware_set_soft_timer(0, 1, 0);
-            Assert.AreEqual(ble_error.ble_err_success, rsp2.result);
-            Assert.IsTrue(numTimerCalls >= 4, $"Expected at least 4 timer callbacks, got {numTimerCalls}");
-        }
+			// setup callback
+			dongle.BgApiEventHandler = evt =>
+			{
+				Assert.AreEqual(evt.GetType(), typeof(ble_msg_hardware_soft_timer_evt_t));
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public async Task DiscoverTest()
-        {
-            var rsp = await dongle.ble_cmd_gap_set_mode(gap_discoverable_mode.gap_general_discoverable, gap_connectable_mode.gap_undirected_connectable);
-            Assert.AreEqual(ble_error.ble_err_success, rsp.result);
-            var rsp2 = await dongle.ble_cmd_gap_set_adv_parameters(2048, 2048, 7);
-            Assert.AreEqual(ble_error.ble_err_success, rsp2.result);
+				var e = (ble_msg_hardware_soft_timer_evt_t)evt;
+				numTimerCalls++;
+				return Task.FromResult(true);
+			};
 
-            // setup callback
-            dongle.BgApiEventHandler = evt => {
-                Assert.AreEqual(evt.GetType(), typeof(ble_msg_gap_scan_response_evt_t));
+			// enable timer
+			var rsp = await dongle.ble_cmd_hardware_set_soft_timer(35000 /* about every second */, 1, 0 /* periodic */);
+			Assert.AreEqual(ble_error.ble_err_success, rsp.result);
+			await Task.Delay(5000);
+			// disable timer
+			var rsp2 = await dongle.ble_cmd_hardware_set_soft_timer(0, 1, 0);
+			Assert.AreEqual(ble_error.ble_err_success, rsp2.result);
+			Assert.IsTrue(numTimerCalls >= 4, $"Expected at least 4 timer callbacks, got {numTimerCalls}");
+		}
 
-                var e = (ble_msg_gap_scan_response_evt_t)evt;
-                Console.WriteLine($"rssi: {e.rssi}, packet type: {e.packet_type}, sender: {e.sender}, address type: {e.address_type}, bond: {e.bond}");
-                return Task.FromResult(true);
-            };
+		[TestMethod]
+		[TestCategory("Integration")]
+		public async Task DiscoverTest()
+		{
+			var rsp = await dongle.ble_cmd_gap_set_mode(gap_discoverable_mode.gap_general_discoverable, gap_connectable_mode.gap_undirected_connectable);
+			Assert.AreEqual(ble_error.ble_err_success, rsp.result);
+			var rsp2 = await dongle.ble_cmd_gap_set_adv_parameters(2048, 2048, 7);
+			Assert.AreEqual(ble_error.ble_err_success, rsp2.result);
 
-            // start discovering
-            var rsp3 = await dongle.ble_cmd_gap_discover(gap_discover_mode.gap_discover_generic);
-            Assert.AreEqual(ble_error.ble_err_success, rsp3.result);
+			// setup callback
+			dongle.BgApiEventHandler = evt =>
+			{
+				Assert.AreEqual(evt.GetType(), typeof(ble_msg_gap_scan_response_evt_t));
 
-            // discovering
-            await Task.Delay(5000);
+				var e = (ble_msg_gap_scan_response_evt_t)evt;
+				Console.WriteLine($"rssi: {e.rssi}, packet type: {e.packet_type}, sender: {e.sender}, address type: {e.address_type}, bond: {e.bond}");
+				return Task.FromResult(true);
+			};
 
-            // stop
-            var rsp4 = await dongle.ble_cmd_gap_end_procedure();
-            Assert.AreEqual(ble_error.ble_err_success, rsp4.result);
-        }
+			// start discovering
+			var rsp3 = await dongle.ble_cmd_gap_discover(gap_discover_mode.gap_discover_generic);
+			Assert.AreEqual(ble_error.ble_err_success, rsp3.result);
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public async Task ConnectTest()
-        {
-            // FIXME: update manually
-            var device2Connect = new[] { (byte)0x92, (byte)0xfc, (byte)0xab, (byte)0x06, (byte)0xde, (byte)0x50 };
+			// discovering
+			await Task.Delay(5000);
 
-            // setup callback
-            dongle.BgApiEventHandler = evt => {
-                Assert.AreEqual(evt.GetType(), typeof(ble_msg_gap_scan_response_evt_t));
+			// stop
+			var rsp4 = await dongle.ble_cmd_gap_end_procedure();
+			Assert.AreEqual(ble_error.ble_err_success, rsp4.result);
+		}
 
-                var e = (ble_msg_gap_scan_response_evt_t)evt;
-                Console.WriteLine($"rssi: {e.rssi}, packet type: {e.packet_type}, sender: {e.sender}, address type: {e.address_type}, bond: {e.bond}");
-                return Task.FromResult(true);
-            };
+		[TestMethod]
+		[TestCategory("Integration")]
+		public async Task ConnectTest()
+		{
+			// FIXME: update manually
+			var device2Connect = new[] { (byte)0x92, (byte)0xfc, (byte)0xab, (byte)0x06, (byte)0xde, (byte)0x50 };
 
-            // start discovering
-            var rsp3 = await dongle.ble_cmd_gap_discover(gap_discover_mode.gap_discover_generic);
-            Assert.AreEqual(ble_error.ble_err_success, rsp3.result);
+			// setup callback
+			dongle.BgApiEventHandler = evt =>
+			{
+				Assert.AreEqual(evt.GetType(), typeof(ble_msg_gap_scan_response_evt_t));
 
-            // discovering
-            await Task.Delay(5000);
+				var e = (ble_msg_gap_scan_response_evt_t)evt;
+				Console.WriteLine($"rssi: {e.rssi}, packet type: {e.packet_type}, sender: {e.sender}, address type: {e.address_type}, bond: {e.bond}");
+				return Task.FromResult(true);
+			};
 
-            var tcs = new TaskCompletionSource();
-            // setup callback, wait for connection to complete
-            dongle.BgApiEventHandler = evt => {
-                if (evt.GetType().Equals(typeof(ble_msg_connection_version_ind_evt_t))) {
-                    var e = (ble_msg_connection_version_ind_evt_t)evt;
-                    Console.WriteLine($"version: {e.vers_nr}, packet type: {e.comp_id}, sender: {e.sub_vers_nr}");
-                    // signal connection result received
-                    tcs.TrySetResult();
-                }
-                return Task.FromResult(true);
-            };
+			// start discovering
+			var rsp3 = await dongle.ble_cmd_gap_discover(gap_discover_mode.gap_discover_generic);
+			Assert.AreEqual(ble_error.ble_err_success, rsp3.result);
 
-            // connect to specific device
-            var rsp4 = await dongle.ble_cmd_gap_connect_direct(
-                new bd_addr() { Address = device2Connect },
-                0, 60, 76, 100, 0);
-            Assert.AreEqual(ble_error.ble_err_success, rsp4.result);
-            int connection_handle = rsp4.connection_handle;
+			// discovering
+			await Task.Delay(5000);
 
-            // wait for connection to complete
-            await tcs.Task;
+			var tcs = new TaskCompletionSource();
+			// setup callback, wait for connection to complete
+			dongle.BgApiEventHandler = evt =>
+			{
+				if (evt.GetType().Equals(typeof(ble_msg_connection_version_ind_evt_t)))
+				{
+					var e = (ble_msg_connection_version_ind_evt_t)evt;
+					Console.WriteLine($"version: {e.vers_nr}, packet type: {e.comp_id}, sender: {e.sub_vers_nr}");
+					// signal connection result received
+					tcs.TrySetResult();
+				}
+				return Task.FromResult(true);
+			};
 
-            var rsp5 = await dongle.ble_cmd_attclient_read_by_group_type(connection_handle, 1, 65535, new byte[] { 0x00, 0x28 } );
-            Assert.AreEqual(ble_error.ble_err_success, rsp5.result);
+			// connect to specific device
+			var rsp4 = await dongle.ble_cmd_gap_connect_direct(
+				new bd_addr() { Address = device2Connect },
+				0, 60, 76, 100, 0);
+			Assert.AreEqual(ble_error.ble_err_success, rsp4.result);
+			int connection_handle = rsp4.connection_handle;
 
-            // wait for all attributes read
-            await Task.Delay(3000);
+			// wait for connection to complete
+			await tcs.Task;
 
-            var rsp6 = await dongle.ble_cmd_connection_disconnect(connection_handle);
-            Assert.AreEqual(ble_error.ble_err_success, rsp6.result);
-        }
-    }
+			var rsp5 = await dongle.ble_cmd_attclient_read_by_group_type(connection_handle, 1, 65535, new byte[] { 0x00, 0x28 });
+			Assert.AreEqual(ble_error.ble_err_success, rsp5.result);
+
+			// wait for all attributes read
+			await Task.Delay(3000);
+
+			var rsp6 = await dongle.ble_cmd_connection_disconnect(connection_handle);
+			Assert.AreEqual(ble_error.ble_err_success, rsp6.result);
+		}
+	}
 }
