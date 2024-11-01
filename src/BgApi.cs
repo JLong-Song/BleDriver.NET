@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.Diagnostics;
 using System.IO.Ports;
-using System.Linq;
-using System.Threading;
 
 namespace BgApiDriver
 {
@@ -183,7 +178,7 @@ namespace BgApiDriver
 
         private void doOpen()
         {
-            m_serialPort = new SerialPort(m_port, 256000, Parity.None, 8, StopBits.One);
+            m_serialPort = new SerialPort(m_port, 112500, Parity.None, 8, StopBits.One);
             // register for data received events
             m_serialDataReceivedEventHandler = new SerialDataReceivedEventHandler(m_serialPort_DataReceived);
             m_serialPort.DataReceived += m_serialDataReceivedEventHandler;
@@ -228,7 +223,7 @@ namespace BgApiDriver
             try
             {
                 int numBytesAvailableInReceiveBuffer = m_serialPort.BytesToRead;
-                log($"numBytesAvailableInReceiveBuffer: {numBytesAvailableInReceiveBuffer}");
+                //log($"numBytesAvailableInReceiveBuffer: {numBytesAvailableInReceiveBuffer}");
                 int availableBufferSpace = m_rx.Length - m_rxOffset;
                 int bytesToRead = Math.Min(availableBufferSpace, numBytesAvailableInReceiveBuffer);
                 int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
@@ -236,20 +231,20 @@ namespace BgApiDriver
 
                 while (true)
                 {
-                    log($"m_rxOffset: {m_rxOffset}");
+                    //log($"m_rxOffset: {m_rxOffset}");
                     if (m_rxOffset < SIZE_HEADER)
                     {
-                        log($"Waiting for header");
+                        //log($"Waiting for header");
                         return;
                     }
 
                     // read payload
                     int length = ((m_rx[0] & 0x7F) << 8) | m_rx[1];
-                    log($"Length: {length}");
+                    //log($"Length: {length}");
                     if (m_rxOffset < SIZE_HEADER + length)
                     {
                         // wait for more data
-                        log($"Waiting for more data, expected {SIZE_HEADER + length}, got {m_rxOffset}");
+                        //log($"Waiting for more data, expected {SIZE_HEADER + length}, got {m_rxOffset}");
                         return;
                     }
 
@@ -263,11 +258,12 @@ namespace BgApiDriver
                         m_rx[i] = m_rx[evtRspBuffer.Length + i];
                     }
                     m_rxOffset -= evtRspBuffer.Length;
-                    log($"m_rxOffset to {m_rxOffset}");
+                    //log($"m_rxOffset to {m_rxOffset}");
 
                     BgApiEventResponse evtRsp = parseEventResponse(new BgApiEventResponse() { Data = evtRspBuffer });
                     if(evtRsp.IsEvent)
                     {
+                        log("RX<-- " + string.Join(" ", evtRspBuffer.Select(x => x.ToString("X2"))));
                         // schedule on ThreadPool thread
                         Task.Factory.StartNew(async () => {
                             await HandleEvent((BgApiEvent)evtRsp);
@@ -295,11 +291,8 @@ namespace BgApiDriver
             {
                 // someone waiting for a response ?
                 var tcs = m_receiveTcs;
-                if (tcs != null)
-                {
-                    // let consumer know something went wrong
-                    tcs.TrySetException(ex);
-                }
+                // let consumer know something went wrong
+                tcs?.TrySetException(ex);
                 log(ex.ToString());
             }
         }
@@ -369,7 +362,7 @@ namespace BgApiDriver
         public virtual void log(string msg)
         {
             Console.WriteLine($"[{DateTime.Now}]{msg}");
-            System.Diagnostics.Debug.Print($"[{DateTime.Now}]{msg}");
+            Trace.WriteLine($"[{DateTime.Now}]{msg}");
         }
     }
 }
