@@ -365,8 +365,8 @@ namespace BgApiDriver
 		/// <param name="msg">The message to log.</param>
 		public virtual void log(string msg)
 		{
-			Console.WriteLine($"[{DateTime.Now}]{msg}");
-			Trace.WriteLine($"[{DateTime.Now}]{msg}");
+			Console.WriteLine($"[{DateTime.Now:yyyy/MM/dd tt hh:mm:ss.fff}]{msg}");
+			Trace.WriteLine($"[{DateTime.Now:yyyy/MM/dd tt hh:mm:ss.fff}]{msg}");
 		}
 	}
 }
